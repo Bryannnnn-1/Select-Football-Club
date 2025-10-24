@@ -205,9 +205,6 @@ function App() {
         <div className="header-controls">
           <p className="welcome">
             Welcome, {userName}!{' '}
-            <button className="logout-btn" onClick={handleLogout}>
-              Logout
-            </button>
           </p>
           {isAdmin ? (
             <button
