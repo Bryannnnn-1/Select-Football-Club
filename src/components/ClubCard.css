@@ -1,0 +1,84 @@
+.club-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.club-card:hover:not(.taken):not(.selected) {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-color: #2563eb;
+}
+
+.club-card.selected {
+  border-color: #16a34a;
+  background: #f0fdf4;
+  cursor: default;
+}
+
+.club-card.taken {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #f9fafb;
+}
+
+.club-image {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.club-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.club-info {
+  text-align: center;
+}
+
+.club-info h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.league {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.taken-badge {
+  margin: 8px 0 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #dc2626;
+  background: #fee2e2;
+  padding: 4px 12px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.selected-badge {
+  margin: 8px 0 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #16a34a;
+  background: #dcfce7;
+  padding: 4px 12px;
+  border-radius: 12px;
+  display: inline-block;
+}

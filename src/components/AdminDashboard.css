@@ -1,0 +1,166 @@
+.admin-dashboard {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.dashboard-header {
+  margin-bottom: 30px;
+}
+
+.dashboard-header h2 {
+  margin: 0 0 20px 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.stats {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 150px;
+}
+
+.stat-value {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.admin-loading {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+  font-size: 18px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+  font-size: 18px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.selections-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.selections-table thead {
+  background: #f9fafb;
+}
+
+.selections-table th {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.selections-table td {
+  padding: 16px;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 15px;
+  color: #111827;
+}
+
+.selections-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.player-name {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.club-name {
+  font-weight: 500;
+}
+
+.league {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.date {
+  color: #6b7280;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.actions {
+  text-align: center;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 20px;
+  }
+
+  .dashboard-header h2 {
+    font-size: 24px;
+  }
+
+  .stat-card {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .stat-value {
+    font-size: 28px;
+  }
+
+  .table-container {
+    margin: 0 -20px;
+    padding: 0 20px;
+  }
+
+  .selections-table {
+    font-size: 14px;
+  }
+
+  .selections-table th,
+  .selections-table td {
+    padding: 10px 8px;
+  }
+}
