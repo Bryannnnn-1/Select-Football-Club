@@ -19,7 +19,7 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
 
-  // Load saved admin session
+  // 🧠 Persist admin login
   useEffect(() => {
     const savedAdmin = localStorage.getItem('isAdmin');
     if (savedAdmin === 'true') setIsAdmin(true);
@@ -29,6 +29,21 @@ function App() {
     localStorage.setItem('isAdmin', isAdmin);
   }, [isAdmin]);
 
+  // 🧠 Persist username
+  useEffect(() => {
+    const savedName = localStorage.getItem('userName');
+    if (savedName) {
+      setUserName(savedName);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userName) {
+      localStorage.setItem('userName', userName);
+    }
+  }, [userName]);
+
+  // 🏗 Load data and subscriptions
   useEffect(() => {
     loadInitialData();
     subscribeToChanges();
@@ -107,6 +122,7 @@ function App() {
 
   const handleUserNameSubmit = (name) => {
     setUserName(name);
+    localStorage.setItem('userName', name);
     const existingSelection = selections.find((s) => s.user_name === name);
     if (existingSelection) {
       setUserSelection(existingSelection);
@@ -164,6 +180,12 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('userName');
+    setUserName('');
+    setUserSelection(null);
+  };
+
   if (loading) {
     return (
       <div className="app">
@@ -181,7 +203,12 @@ function App() {
       <header className="header">
         <h1>Football Club Selection</h1>
         <div className="header-controls">
-          <p className="welcome">Welcome, {userName}!</p>
+          <p className="welcome">
+            Welcome, {userName}!{' '}
+            <button className="logout-btn" onClick={handleLogout}>
+              Logout
+            </button>
+          </p>
           {isAdmin ? (
             <button
               className="toggle-view-btn"
