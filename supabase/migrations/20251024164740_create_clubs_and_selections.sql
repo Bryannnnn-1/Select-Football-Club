@@ -108,6 +108,14 @@ INSERT INTO clubs (name, league, logo_url) VALUES
   ('Inter Milan', 'Serie A', 'https://images.pexels.com/photos/2834917/pexels-photo-2834917.jpeg?auto=compress&cs=tinysrgb&w=100'),
   ('AC Milan', 'Serie A', 'https://images.pexels.com/photos/209841/pexels-photo-209841.jpeg?auto=compress&cs=tinysrgb&w=100'),
   ('Arsenal', 'Premier League', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
+  ('Borussia Dortmund', 'Bundesliga', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
+  ('Inter Miami', 'Major League Soccer', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
+  ('Benfica', 'Primeira Liga', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
+  ('FC Porto', 'Primeira Liga', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
+  ('Al Nassr', 'Saudi Pro League', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
+  ('Athletic Bilbao', 'La Liga', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
+  ('Newcastle United', 'Premier League', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
+  ('Al Hilal', 'Saudi Pro League', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
 ON CONFLICT DO NOTHING;
 
 -- Insert default game config
