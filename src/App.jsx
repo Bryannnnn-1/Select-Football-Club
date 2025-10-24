@@ -19,7 +19,7 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
 
-  // 🧠 Persist admin login
+
   useEffect(() => {
     const savedAdmin = localStorage.getItem('isAdmin');
     if (savedAdmin === 'true') setIsAdmin(true);
@@ -29,7 +29,7 @@ function App() {
     localStorage.setItem('isAdmin', isAdmin);
   }, [isAdmin]);
 
-  // 🧠 Persist username
+
   useEffect(() => {
     const savedName = localStorage.getItem('userName');
     if (savedName) {
@@ -43,11 +43,16 @@ function App() {
     }
   }, [userName]);
 
-  // 🏗 Load data and subscriptions
+
   useEffect(() => {
     loadInitialData();
-    subscribeToChanges();
+
+    const unsubscribe = subscribeToChanges();
+    return () => {
+      unsubscribe && unsubscribe();
+    };
   }, []);
+
 
   const loadInitialData = async () => {
     try {
@@ -81,28 +86,31 @@ function App() {
     }
   };
 
-  const subscribeToChanges = () => {
+    const subscribeToChanges = () => {
     const selectionsChannel = supabase
-      .channel('selections_changes')
+      .channel('realtime:user_selections')
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'user_selections' },
-        () => {
-          loadSelections();
+        (payload) => {
+          console.log('🔁 Selections changed:', payload);
+          loadSelections(); 
         }
       )
-      .subscribe();
+      .subscribe((status) => console.log('Selection channel:', status));
+
 
     const configChannel = supabase
-      .channel('config_changes')
+      .channel('realtime:game_config')
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'game_config' },
-        () => {
-          loadConfig();
+        (payload) => {
+          console.log('⚙️ Config changed:', payload);
+          loadConfig(); 
         }
       )
-      .subscribe();
+      .subscribe((status) => console.log('Config channel:', status));
 
     return () => {
       supabase.removeChannel(selectionsChannel);
@@ -110,15 +118,24 @@ function App() {
     };
   };
 
+
   const loadSelections = async () => {
     const { data } = await supabase.from('user_selections').select('*');
     if (data) setSelections(data);
   };
 
   const loadConfig = async () => {
-    const { data } = await supabase.from('game_config').select('*').maybeSingle();
-    if (data) setPlayerLimit(data.player_limit);
+    const { data, error } = await supabase.from('game_config').select('*').maybeSingle();
+    if (error) {
+      console.error('Error loading config:', error);
+      return;
+    }
+    if (data) {
+      setPlayerLimit(data.player_limit);
+      setConfigId(data.id);
+    }
   };
+
 
   const handleUserNameSubmit = (name) => {
     setUserName(name);
@@ -129,18 +146,28 @@ function App() {
     }
   };
 
-  const handleClubSelect = async (clubId) => {
+    const handleClubSelect = async (clubId) => {
+    if (!userName) return;
+
+
+    if (userSelection) {
+      alert('You have already selected a club. You cannot change it.');
+      return;
+    }
+
+
+    const confirmChoice = window.confirm(
+      'Are you sure you want to represent this club? You will not be able to change it later.'
+    );
+
+    if (!confirmChoice) return;
+
     if (selections.length >= playerLimit) {
       alert('Player limit reached! Cannot select more clubs.');
       return;
     }
 
-    if (!userName) return;
-
     try {
-      if (userSelection) {
-        await supabase.from('user_selections').delete().eq('id', userSelection.id);
-      }
 
       const { data, error } = await supabase
         .from('user_selections')
@@ -159,12 +186,14 @@ function App() {
         }
       } else if (data) {
         setUserSelection(data);
+        alert(`You have successfully chosen your club! ⚽`);
       }
     } catch (error) {
       console.error('Error selecting club:', error);
       alert('Failed to select club. Please try again.');
     }
   };
+
 
   const handleLimitUpdate = async (newLimit) => {
     if (!configId) return;
@@ -251,6 +280,7 @@ function App() {
                     isTaken={isTaken && !isSelected}
                     selectedBy={selection?.user_name}
                     onSelect={handleClubSelect}
+                    disabled={!!userSelection}
                   />
                 );
               })}

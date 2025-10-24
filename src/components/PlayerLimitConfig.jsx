@@ -1,13 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './PlayerLimitConfig.css';
 
 function PlayerLimitConfig({ currentLimit, onUpdate, currentPlayerCount }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newLimit, setNewLimit] = useState(currentLimit);
 
+  // 🧠 Sync the input if currentLimit changes externally
+  useEffect(() => {
+    setNewLimit(currentLimit);
+  }, [currentLimit]);
+
   const handleSave = () => {
     if (newLimit > 0 && newLimit !== currentLimit) {
-      onUpdate(newLimit);
+      onUpdate(newLimit); // immediately updates Supabase + local state
     }
     setIsEditing(false);
   };
@@ -46,7 +51,7 @@ function PlayerLimitConfig({ currentLimit, onUpdate, currentPlayerCount }) {
               type="number"
               id="player-limit"
               min="1"
-              max="100"
+              max="20"
               value={newLimit}
               onChange={(e) => setNewLimit(parseInt(e.target.value) || 1)}
             />
@@ -64,7 +69,7 @@ function PlayerLimitConfig({ currentLimit, onUpdate, currentPlayerCount }) {
 
       {currentPlayerCount >= currentLimit && (
         <div className="limit-warning">
-          Player limit reached! No more selections allowed.
+          ⚠️ Player limit reached! No more selections allowed.
         </div>
       )}
     </div>

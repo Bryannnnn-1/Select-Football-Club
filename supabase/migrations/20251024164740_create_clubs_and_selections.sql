@@ -37,7 +37,7 @@
 CREATE TABLE IF NOT EXISTS clubs (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   name text NOT NULL,
-  logo_url text,
+  logo_url varchar,
   league text,
   created_at timestamptz DEFAULT now()
 );
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS user_selections (
 -- Create game_config table
 CREATE TABLE IF NOT EXISTS game_config (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  player_limit integer NOT NULL DEFAULT 11,
+  player_limit integer NOT NULL DEFAULT 20,
   updated_at timestamptz DEFAULT now()
 );
 
@@ -81,7 +81,7 @@ CREATE POLICY "Anyone can delete own selection"
   ON user_selections FOR DELETE
   USING (true);
 
--- Game config policies (public read and update)
+
 CREATE POLICY "Anyone can view config"
   ON game_config FOR SELECT
   USING (true);
@@ -95,29 +95,28 @@ CREATE POLICY "Anyone can insert config"
   WITH CHECK (true);
 
 INSERT INTO clubs (name, league, logo_url) VALUES
-  ('Manchester United', 'Premier League', '/assets/manchester-united.svg'),
-  ('Real Madrid', 'La Liga', '/assets/real-madrid.svg'),
-  ('Barcelona', 'La Liga', '/assets/FC_Barcelona-O8Y3.svg'),
-  ('Bayern Munich', 'Bundesliga', '/assets/fc-bayern-munich-logo.svg'),
-  ('Liverpool', 'Premier League', '/assets/liverpool-fc-logo.svg'),
-  ('Paris Saint-Germain', 'Ligue 1', '/assets/paris-saint-germain-logo.svg'),
-  ('Chelsea', 'Premier League', '/assets/chelsea-fc-logo.svg'),
-  ('Juventus', 'Serie A', '/assets/Juventus_FC-O1ivIU.svg'),
-  ('Manchester City', 'Premier League', '/assets/manchester-city-logo.svg'),
-  ('Inter Milan', 'Serie A', '/assets/inter-milan-logo.svg'),
-  ('AC Milan', 'Serie A', '/assets/ac-milan-logo.svg'),
-  ('Arsenal', 'Premier League', '/assets/arsenal-fc-logo.svg'),
-  ('Borussia Dortmund', 'Bundesliga', '/assets/borussia-dortmund-logo.svg'),
-  ('Inter Miami', 'Major League Soccer', '/assets/inter-miami-cf-logo.svg'),
-  ('Benfica', 'Primeira Liga', '/assets/sl-benfica-logo.svg'),
-  ('FC Porto', 'Primeira Liga', '/assets/fc-porto-logo.svg'),
-  ('Al Nassr', 'Saudi Pro League', '/assets/al-nassr-fc-logo.svg'),
-  ('Athletic Bilbao', 'La Liga', '/assets/athletic-bilbao-logo.svg'),
-  ('Newcastle United', 'Premier League', '/assets/newcastle-united-logo.svg'),
-  ('Al Hilal', 'Saudi Pro League', '/assets/al-hilal-sfc-logo.svg')
-ON CONFLICT DO NOTHING;
+  ('Al Nassr', 'Saudi Pro League', 'al-nassr'),
+  ('Al Hilal', 'Saudi Pro League', 'al-hilal'),
+  ('AC Milan', 'Serie A', 'ac-milan'),
+  ('Arsenal', 'Premier League', 'arsenal-fc'),
+  ('Athletic Bilbao', 'La Liga', 'athletic-bilbao'),
+  ('Barcelona', 'La Liga', 'FC_Barcelona'),
+  ('Benfica', 'Primeira Liga', 'benfica'),
+  ('Bayern Munich', 'Bundesliga', 'fc-bayern-munich'),
+  ('FC Porto', 'Primeira Liga', 'fc-porto-logo'),
+  ('Borussia Dortmund', 'Bundesliga', 'borussia-dortmund'),
+  ('Chelsea', 'Premier League', 'chelsea-fc'),
+  ('Inter Miami', 'Major League Soccer', 'inter-miami'),
+  ('Inter Milan', 'Serie A', 'inter-milan'),
+  ('Juventus', 'Serie A', 'Juventus'),
+  ('Liverpool', 'Premier League', 'liverpool'),
+  ('Manchester City', 'Premier League', 'manchester-city'),
+  ('Manchester United', 'Premier League', 'manchester-united'),
+  ('Newcastle United', 'Premier League', 'newcastle-united'),
+  ('Paris Saint-Germain', 'Ligue 1', 'PSG'),
+  ('Real Madrid', 'La Liga', 'real_madrid');
 
 
 -- Insert default game config
-INSERT INTO game_config (player_limit) VALUES (11)
+INSERT INTO game_config (player_limit) VALUES (20)
 ON CONFLICT DO NOTHING;
