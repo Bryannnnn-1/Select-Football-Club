@@ -94,29 +94,29 @@ CREATE POLICY "Anyone can insert config"
   ON game_config FOR INSERT
   WITH CHECK (true);
 
--- Seed clubs data
 INSERT INTO clubs (name, league, logo_url) VALUES
-  ('Manchester United', 'Premier League', 'https://images.pexels.com/photos/274506/pexels-photo-274506.jpeg?auto=compress&cs=tinysrgb&w=100'),
-  ('Real Madrid', 'La Liga', 'https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg?auto=compress&cs=tinysrgb&w=100'),
-  ('Barcelona', 'La Liga', 'https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?auto=compress&cs=tinysrgb&w=100'),
-  ('Bayern Munich', 'Bundesliga', 'https://images.pexels.com/photos/262524/pexels-photo-262524.jpeg?auto=compress&cs=tinysrgb&w=100'),
-  ('Liverpool', 'Premier League', 'https://images.pexels.com/photos/27860083/pexels-photo-27860083.jpeg?auto=compress&cs=tinysrgb&w=100'),
-  ('Paris Saint-Germain', 'Ligue 1', 'https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg?auto=compress&cs=tinysrgb&w=100'),
-  ('Chelsea', 'Premier League', 'https://images.pexels.com/photos/399187/pexels-photo-399187.jpeg?auto=compress&cs=tinysrgb&w=100'),
-  ('Juventus', 'Serie A', 'https://images.pexels.com/photos/186743/pexels-photo-186743.jpeg?auto=compress&cs=tinysrgb&w=100'),
-  ('Manchester City', 'Premier League', 'https://images.pexels.com/photos/3621104/pexels-photo-3621104.jpeg?auto=compress&cs=tinysrgb&w=100'),
-  ('Inter Milan', 'Serie A', 'https://images.pexels.com/photos/2834917/pexels-photo-2834917.jpeg?auto=compress&cs=tinysrgb&w=100'),
-  ('AC Milan', 'Serie A', 'https://images.pexels.com/photos/209841/pexels-photo-209841.jpeg?auto=compress&cs=tinysrgb&w=100'),
-  ('Arsenal', 'Premier League', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
-  ('Borussia Dortmund', 'Bundesliga', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
-  ('Inter Miami', 'Major League Soccer', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
-  ('Benfica', 'Primeira Liga', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
-  ('FC Porto', 'Primeira Liga', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
-  ('Al Nassr', 'Saudi Pro League', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
-  ('Athletic Bilbao', 'La Liga', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
-  ('Newcastle United', 'Premier League', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
-  ('Al Hilal', 'Saudi Pro League', 'https://images.pexels.com/photos/3621100/pexels-photo-3621100.jpeg?auto=compress&cs=tinysrgb&w=100')
+  ('Manchester United', 'Premier League', '/assets/manchester-united.svg'),
+  ('Real Madrid', 'La Liga', '/assets/real-madrid.svg'),
+  ('Barcelona', 'La Liga', '/assets/FC_Barcelona-O8Y3.svg'),
+  ('Bayern Munich', 'Bundesliga', '/assets/fc-bayern-munich-logo.svg'),
+  ('Liverpool', 'Premier League', '/assets/liverpool-fc-logo.svg'),
+  ('Paris Saint-Germain', 'Ligue 1', '/assets/paris-saint-germain-logo.svg'),
+  ('Chelsea', 'Premier League', '/assets/chelsea-fc-logo.svg'),
+  ('Juventus', 'Serie A', '/assets/Juventus_FC-O1ivIU.svg'),
+  ('Manchester City', 'Premier League', '/assets/manchester-city-logo.svg'),
+  ('Inter Milan', 'Serie A', '/assets/inter-milan-logo.svg'),
+  ('AC Milan', 'Serie A', '/assets/ac-milan-logo.svg'),
+  ('Arsenal', 'Premier League', '/assets/arsenal-fc-logo.svg'),
+  ('Borussia Dortmund', 'Bundesliga', '/assets/borussia-dortmund-logo.svg'),
+  ('Inter Miami', 'Major League Soccer', '/assets/inter-miami-cf-logo.svg'),
+  ('Benfica', 'Primeira Liga', '/assets/sl-benfica-logo.svg'),
+  ('FC Porto', 'Primeira Liga', '/assets/fc-porto-logo.svg'),
+  ('Al Nassr', 'Saudi Pro League', '/assets/al-nassr-fc-logo.svg'),
+  ('Athletic Bilbao', 'La Liga', '/assets/athletic-bilbao-logo.svg'),
+  ('Newcastle United', 'Premier League', '/assets/newcastle-united-logo.svg'),
+  ('Al Hilal', 'Saudi Pro League', '/assets/al-hilal-sfc-logo.svg')
 ON CONFLICT DO NOTHING;
+
 
 -- Insert default game config
 INSERT INTO game_config (player_limit) VALUES (11)
